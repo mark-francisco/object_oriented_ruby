@@ -43,25 +43,43 @@
 # Exercise:
 # Replace your “reader” and “writer” methods using the attr_reader and attr_writer shortcuts!
 # Bonus: Read more about how attr_reader works its magic (advanced stuff here) https://mikeyhogarth.wordpress.com/2011/12/01/creating-your-own-attr_accessor-in-ruby/
-class StoreTwo
-  # READERS
-  attr_reader :name, :color, :price
+# class StoreTwo
+#   # READERS
+#   attr_reader :name, :color, :price
 
+#   # WRITERS
+#   attr_writer :price
+
+#   def initialize(name, color, price)
+#     @name = name
+#     @color = color
+#     @price = price
+#   end
+# end
+
+# menards = StoreTwo.new("tarps", "green", 100)
+# puts "MENARDS SELLS"
+# puts "this product: #{menards.name}"
+# puts "and it sells #{menards.color} colored"
+# puts "at the price of #{menards.price}"
+
+# menards.price = (50)
+# puts menards.price
+
+# Exercise: Rewrite your store items using a class with a single options hash in the initialize method.
+class StoreThree
+  # READERS
+  attr_reader :product_name, :color, :price
   # WRITERS
   attr_writer :price
 
-  def initialize(name, color, price)
-    @name = name
-    @color = color
-    @price = price
+  def initialize(input_hash)
+    @product_name = input_hash[:product_name]
+    @color = input_hash[:color]
+    @price = input_hash[:price]
   end
 end
 
-menards = StoreTwo.new("tarps", "green", 100)
-puts "MENARDS SELLS"
-puts "this product: #{menards.name}"
-puts "and it sells #{menards.color} colored"
-puts "at the price of #{menards.price}"
-
-menards.price = (50)
-puts menards.price
+dollar_store = StoreThree.new({ :product_name => "gummy bears", :color => "many", :price => 2.5 })
+dollar_store.price = (5000)
+puts "welcome to the dollar store, where we sell #{dollar_store.product_name} which is the color #{dollar_store.color} and costs #{dollar_store.price} dollars."
