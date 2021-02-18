@@ -67,19 +67,58 @@
 # puts menards.price
 
 # Exercise: Rewrite your store items using a class with a single options hash in the initialize method.
-class StoreThree
+# class StoreThree
+#   # READERS
+#   attr_reader :product_name, :color, :price
+#   # WRITERS
+#   attr_writer :price
+
+#   def initialize(input_hash)
+#     @product_name = input_hash[:product_name]
+#     @color = input_hash[:color]
+#     @price = input_hash[:price]
+#   end
+# end
+
+# dollar_store = StoreThree.new({ :product_name => "gummy bears", :color => "many", :price => 2.5 })
+# dollar_store.price = (5000)
+# puts "welcome to the dollar store, where we sell #{dollar_store.product_name} which is the color #{dollar_store.color} and costs #{dollar_store.price} dollars."
+
+
+# Some of your store items are food, which have a shelf life. Create a class called Food which inherits from your original class and has an additional property of shelf_life.
+class Store
   # READERS
   attr_reader :product_name, :color, :price
   # WRITERS
   attr_writer :price
 
-  def initialize(input_hash)
-    @product_name = input_hash[:product_name]
-    @color = input_hash[:color]
-    @price = input_hash[:price]
+  def initialize(input_hash={})
+    @product_name = input_hash[:product_name] || "yo-yo"
+    @color = input_hash[:color] || "purple"
+    @price = input_hash[:price] || 1.00
   end
 end
 
-dollar_store = StoreThree.new({ :product_name => "gummy bears", :color => "many", :price => 2.5 })
+class Food < Store
+  attr_accessor :shelf_life, :flavor
+  def initialize(input_hash)
+    super
+    @shelf_life = input_hash[:shelf_life] || 3
+    @flavor = input_hash[:flavor] || "minimal"
+  end
+end
+
+dollar_store = Store.new({ :product_name => "gummy bears", :color => "many", :price => 2.5 })
 dollar_store.price = (5000)
 puts "welcome to the dollar store, where we sell #{dollar_store.product_name} which is the color #{dollar_store.color} and costs #{dollar_store.price} dollars."
+
+cabbage = Food.new({:product_name => "cabbage", :color => "green", :price => 4.99})
+# p cabbage.shelf_life
+# p cabbage.flavor
+# p cabbage.product_name
+# p cabbage.color
+# p cabbage.price
+p cabbage
+
+yo_yo = Food.new({:product_name => "YO-YO"})
+p yo_yo
